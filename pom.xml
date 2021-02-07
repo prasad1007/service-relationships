@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.0</version>
+	</parent>
+
+	<groupId>com.org.servicerelationships</groupId>
+	<artifactId>service-relationships</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>service-relationships</name>
+	<description>This service holds relationships between various services</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+		<guava.version>27.0.1-jre</guava.version>
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<spotless-maven-plugin.version>1.14.0</spotless-maven-plugin.version>
+		<spring-banner.version>1.0</spring-banner.version>
+		<junit.version>4.13</junit.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- Spring Dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- H2 In Memory Database Dependency -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Google guava dependency -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+		<!-- Commons CSV -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<!-- Test Dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>ch.acanda.maven</groupId>
+				<artifactId>spring-banner-plugin</artifactId>
+				<version>${spring-banner.version}</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>generate-spring-banner</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<text>${project.name}</text>
+					<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+					<filename>banner.txt</filename>
+					<includeInfo>true</includeInfo>
+					<color>default</color>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>apply</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<java>
+						<includes>
+							<include>src/main/java/**</include>
+							<include>src/test/java/**</include>
+						</includes>
+						<googleJavaFormat>
+							<version>1.6</version>
+							<style>GOOGLE</style>
+						</googleJavaFormat>
+						<removeUnusedImports/>
+						<importOrder>
+							<order>java,javax,org,com,com.diffplug,</order>
+						</importOrder>
+					</java>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
