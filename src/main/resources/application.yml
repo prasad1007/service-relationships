@@ -1,0 +1,42 @@
+server:
+  port: 8443
+
+spring:
+  application:
+    name: servicerelationships
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+      base-path: /
+  endpoint:
+    beans:
+      enabled: true
+    health:
+      show-details: always
+    info:
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: qa
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

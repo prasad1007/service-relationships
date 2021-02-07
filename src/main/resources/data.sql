@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS SERVICE_RELATIONSHIPS;
+
+CREATE TABLE SERVICE_RELATIONSHIPS
+(
+    parent VARCHAR(50),
+    child  VARCHAR(50),
+    label  VARCHAR(50),
+    impact REAL,
+    PRIMARY KEY (parent, child)
+);
